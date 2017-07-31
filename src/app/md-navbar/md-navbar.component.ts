@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-md-navbar',
@@ -7,13 +7,6 @@ import {Component, OnInit} from "@angular/core";
 })
 export class MdNavbarComponent implements OnInit {
 
-  dato = 'Creando componentes';
-  arrayClases: Preguntas[] = [{
-    pregunta: 'Se ve esta pregunta?',
-    afirmativo: 12,
-    negativo: 21,
-  }];
-
   constructor() {
   }
 
@@ -21,10 +14,4 @@ export class MdNavbarComponent implements OnInit {
     console.log('Componente creado');
   }
 
-}
-
-interface Preguntas {
-  pregunta: string;
-  afirmativo: number;
-  negativo: number;
 }
