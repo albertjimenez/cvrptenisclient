@@ -1,23 +1,21 @@
 <style>
   @import url('https://fonts.googleapis.com/css?family=Lobster');
 </style>
-
-
 <!--Header-->
 <app-md-navbar></app-md-navbar>
 
 <!--Main Page-->
-<nav>
-  <a [routerLink]="['/']">Inicio</a>
-  <a [routerLink]="['/van']">Furgonetas</a>
-  <a [routerLink]="['/children']">Niños</a>
+<nav class="wrapper">
+  <a class="button animated bounceInUp" style="font-family: Pacifico" color="primary" [routerLink]="['/children']"
+     (click)="hideButton()"
+     id="button">
+    <span>Empezar</span>
+  </a>
+  <!--<a [routerLink]="['/van']">Furgonetas</a>-->
+  <!--<a [routerLink]="['/children']">Niños</a>-->
 </nav>
-
 <router-outlet></router-outlet>
 
 <!--Footer-->
 <app-md-footer></app-md-footer>
-
-
-
 
