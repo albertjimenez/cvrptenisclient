@@ -1,3 +1,68 @@
-<p>
-  form-children works!
-</p>
+<md-card id="form_background">
+  <md-card-title>Posición de tus niños</md-card-title>
+  <form novalidate [formGroup]="child" (ngSubmit)="onSubmit()">
+    <md-card-content>
+      <md-input-container>
+        <label>
+          <span>Id</span>
+          <input mdInput
+                 formControlName="id">
+        </label>
+      </md-input-container>
+    </md-card-content>
+    <md-card-content>
+      <md-input-container>
+        <label>
+          <span>Número de niños (en blanco = 1)</span>
+          <input mdInput
+                 type="number"
+                 min="1"
+                 formControlName="cost">
+        </label>
+      </md-input-container>
+    </md-card-content>
+    <md-card-content>
+      <md-input-container>
+        <label>
+          <span>Coordenada X</span>
+          <input mdInput
+                 type="number"
+                 formControlName="x">
+        </label>
+      </md-input-container>
+    </md-card-content>
+    <md-card-content>
+      <md-input-container>
+        <label>
+          <span>Coordenada Y</span>
+          <input mdInput
+                 type="number"
+                 formControlName="y">
+        </label>
+      </md-input-container>
+    </md-card-content>
+    <button md-raised-button color="accent" [disabled]="child.invalid">Enviar</button>
+  </form>
+</md-card>
+<div id="background-wrap">
+  <div class="x1">
+    <div class="cloud"></div>
+  </div>
+
+  <div class="x2">
+    <div class="cloud"></div>
+  </div>
+
+  <div class="x3">
+    <div class="cloud"></div>
+  </div>
+
+  <div class="x4">
+    <div class="cloud"></div>
+  </div>
+
+  <div class="x5">
+    <div class="cloud"></div>
+  </div>
+</div>
+

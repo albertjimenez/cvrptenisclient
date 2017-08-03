@@ -3,11 +3,20 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AppComponent} from './app.component';
 import {MdNavbarComponent} from './md-navbar/md-navbar.component';
-import {MdButtonModule, MdIconModule, MdIconRegistry, MdToolbarModule} from '@angular/material';
+import {
+  MdButtonModule,
+  MdCardModule,
+  MdIconModule,
+  MdIconRegistry,
+  MdInputModule,
+  MdToolbarModule
+} from '@angular/material';
 import 'hammerjs';
+import {ReactiveFormsModule} from '@angular/forms';
 import {MdFooterComponent} from './md-footer/md-footer.component';
 import {FormVanComponent} from './form-van/form-van.component';
 import {FormChildrenComponent} from './form-children/form-children.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 // Const routes to form-children and form-van
 
@@ -30,7 +39,8 @@ const routes: Routes = [{
     FormChildrenComponent,
   ],
   imports: [
-    BrowserModule, MdButtonModule, MdIconModule, MdToolbarModule, RouterModule.forRoot(routes)
+    BrowserModule, MdButtonModule, MdIconModule, MdToolbarModule, RouterModule.forRoot(routes),
+    ReactiveFormsModule, MdInputModule, BrowserAnimationsModule, MdCardModule
   ],
   exports: [MdButtonModule, RouterModule],
   providers: [MdIconRegistry],
