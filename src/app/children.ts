@@ -12,4 +12,8 @@ export class Children {
     this.x = x;
     this.y = y;
   }
+
+  public toString() {
+    return 'ID: ' + this.id + ' X: ' + this.x + ' Y: ' + this.y + ' Cost: ' + this.cost
+  };
 }

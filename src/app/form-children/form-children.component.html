@@ -1,4 +1,4 @@
-<md-card id="form_background">
+<md-card id="form_background" class="animated bounceInUp">
   <md-card-title>Posición de tus niños</md-card-title>
   <form novalidate [formGroup]="child" (ngSubmit)="onSubmit()">
     <md-card-content>
@@ -41,28 +41,13 @@
         </label>
       </md-input-container>
     </md-card-content>
-    <button md-raised-button color="accent" [disabled]="child.invalid">Enviar</button>
+    <button md-raised-button color="accent" [disabled]="child.invalid">Añadir nuevo niño</button>
+    <a md-raised-button style="background-color: lawngreen" [routerLink]="['/vans']">Siguiente</a>
   </form>
 </md-card>
-<div id="background-wrap">
-  <div class="x1">
-    <div class="cloud"></div>
-  </div>
 
-  <div class="x2">
-    <div class="cloud"></div>
-  </div>
+<div *ngIf="!validForm">
 
-  <div class="x3">
-    <div class="cloud"></div>
-  </div>
-
-  <div class="x4">
-    <div class="cloud"></div>
-  </div>
-
-  <div class="x5">
-    <div class="cloud"></div>
-  </div>
 </div>
+
 

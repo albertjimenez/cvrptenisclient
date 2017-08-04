@@ -19,9 +19,8 @@ import {FormChildrenComponent} from './form-children/form-children.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 // Const routes to form-children and form-van
-
 const routes: Routes = [{
-  path: 'van',
+  path: 'vans',
   component: FormVanComponent
 },
   {
