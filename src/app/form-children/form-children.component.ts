@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {StoreAndGenerateService} from '../store-and-generate.service';
 import {Children} from '../children';
+import swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-form-children',
@@ -16,6 +18,7 @@ export class FormChildrenComponent implements OnInit {
 
 
   constructor(private storeComponent: StoreAndGenerateService) {
+
   }
 
   ngOnInit() {
@@ -33,11 +36,18 @@ export class FormChildrenComponent implements OnInit {
    * @param {any} value of the form representing a child
    * @return {boolean}
    */
+  // TODO make use of Window.sessionStorage for saving current childs
   onSubmit() {
     const myChild = new Children(this.child.value.id, this.child.value.x, this.child.value.y, this.child.value.cost);
     if (this.child.valid) {
       if (!this.storeComponent.storeChildren(myChild)) {
-        this.validForm = false
+        this.validForm = false;
+        swal({
+          title: 'Error!',
+          text: 'Revisa el campo ID ya que se encuentra repetido con otro niño',
+          type: 'error',
+          confirmButtonText: 'Ok'
+        });
       } else {
         this.validForm = true;
       }
