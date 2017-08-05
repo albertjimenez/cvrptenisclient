@@ -3,6 +3,8 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AppComponent} from './app.component';
 import {MdNavbarComponent} from './md-navbar/md-navbar.component';
+import {ToasterModule} from 'angular2-toaster';
+
 import {
   MdButtonModule,
   MdCardModule,
@@ -39,7 +41,7 @@ const routes: Routes = [{
   ],
   imports: [
     BrowserModule, MdButtonModule, MdIconModule, MdToolbarModule, RouterModule.forRoot(routes),
-    ReactiveFormsModule, MdInputModule, BrowserAnimationsModule, MdCardModule
+    ReactiveFormsModule, MdInputModule, BrowserAnimationsModule, MdCardModule, ToasterModule
   ],
   exports: [MdButtonModule, RouterModule],
   providers: [MdIconRegistry],

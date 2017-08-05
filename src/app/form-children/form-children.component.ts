@@ -3,7 +3,10 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {StoreAndGenerateService} from '../store-and-generate.service';
 import {Children} from '../children';
 import swal from 'sweetalert2';
+import {ToasterService} from 'angular2-toaster';
 
+
+declare var $: any;
 
 @Component({
   selector: 'app-form-children',
@@ -14,21 +17,26 @@ import swal from 'sweetalert2';
 export class FormChildrenComponent implements OnInit {
 
   child: FormGroup;
+  private toasterService: ToasterService;
+
   @Input() validForm = true;
 
 
-  constructor(private storeComponent: StoreAndGenerateService) {
+  constructor(private storeComponent: StoreAndGenerateService, toasterService: ToasterService) {
+    this.toasterService = toasterService;
+
 
   }
 
   ngOnInit() {
+    $('#button').hide();
+
     this.child = new FormGroup({
       cost: new FormControl(''),
       id: new FormControl('', Validators.required),
       x: new FormControl('', Validators.required),
       y: new FormControl('', Validators.required)
     });
-
   }
 
   /**
@@ -49,6 +57,7 @@ export class FormChildrenComponent implements OnInit {
           confirmButtonText: 'Ok'
         });
       } else {
+        this.toasterService.pop('success', 'Niño con ID ' + myChild.id, 'Añadido Correctamente');
         this.validForm = true;
       }
     }
