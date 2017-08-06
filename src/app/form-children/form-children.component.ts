@@ -18,14 +18,12 @@ export class FormChildrenComponent implements OnInit {
 
   child: FormGroup;
   private toasterService: ToasterService;
+  @Input() listChildrenID: string[] = [];
 
   @Input() validForm = true;
 
-
   constructor(private storeComponent: StoreAndGenerateService, toasterService: ToasterService) {
     this.toasterService = toasterService;
-
-
   }
 
   ngOnInit() {
@@ -37,6 +35,7 @@ export class FormChildrenComponent implements OnInit {
       x: new FormControl('', Validators.required),
       y: new FormControl('', Validators.required)
     });
+
   }
 
   /**
@@ -59,8 +58,17 @@ export class FormChildrenComponent implements OnInit {
       } else {
         this.toasterService.pop('success', 'Niño con ID ' + myChild.id, 'Añadido Correctamente');
         this.validForm = true;
+        this.listChildrenID.push(myChild.id);
       }
     }
+
+  }
+
+  eventDoubleClick(event) {
+    const childID = event.target.lastChild.textContent;
+    this.storeComponent.deleteChildrenById(childID);
+    this.toasterService.pop('info', 'Niño con ID ' + childID, 'Borrado Correctamente');
+
 
   }
 

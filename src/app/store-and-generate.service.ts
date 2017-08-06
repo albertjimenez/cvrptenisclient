@@ -11,12 +11,8 @@ export class StoreAndGenerateService {
   }
 
   storeChildren(child: Children): boolean {
-
-
     if (childrenList.filter(c => c.id === child.id).length === 0) {
       childrenList.push(child);
-      console.log('Childs stored:\n');
-      childrenList.forEach(ch => console.log(ch.toString()));
       return true;
     }
     return false;
@@ -24,6 +20,19 @@ export class StoreAndGenerateService {
 
   size(): number {
     return childrenList.length;
+  }
+
+  getChildren() {
+    return childrenList;
+  }
+
+  setChildren(childrenList2: Array<Children>) {
+    childrenList = childrenList2;
+  }
+
+  deleteChildrenById(ids: string) {
+    const index = childrenList.findIndex(todo => todo.id === ids.trim());
+    childrenList.splice(index, 1);
   }
 
 }

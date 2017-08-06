@@ -8,9 +8,12 @@ import {ToasterModule} from 'angular2-toaster';
 import {
   MdButtonModule,
   MdCardModule,
+  MdChipsModule,
   MdIconModule,
   MdIconRegistry,
   MdInputModule,
+  MdListModule,
+  MdRippleModule,
   MdToolbarModule
 } from '@angular/material';
 import 'hammerjs';
@@ -41,7 +44,7 @@ const routes: Routes = [{
   ],
   imports: [
     BrowserModule, MdButtonModule, MdIconModule, MdToolbarModule, RouterModule.forRoot(routes),
-    ReactiveFormsModule, MdInputModule, BrowserAnimationsModule, MdCardModule, ToasterModule
+    ReactiveFormsModule, MdInputModule, BrowserAnimationsModule, MdCardModule, ToasterModule, MdListModule, MdChipsModule, MdRippleModule
   ],
   exports: [MdButtonModule, RouterModule],
   providers: [MdIconRegistry],

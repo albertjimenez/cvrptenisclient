@@ -1,3 +1,9 @@
+<!--<md-list>-->
+<!--<ul *ngFor="let c of listChildrenID">-->
+<!--<md-list-item id="{{c}}" (dblclick)="eventDoubleClick($event)">{{c}}</md-list-item>-->
+<!--</ul>-->
+<!--</md-list>-->
+
 <md-card id="form_background" class="animated bounceInUp">
   <md-card-title>Posición de tus niños</md-card-title>
   <form novalidate [formGroup]="child" (ngSubmit)="onSubmit()">
@@ -45,6 +51,15 @@
     <a md-raised-button style="background-color: lawngreen" [routerLink]="['/vans']">Siguiente</a>
   </form>
 </md-card>
+
+
+<h1 class="my-shadow" style="font-family: Lobster;text-align: center">Niños añadidos</h1>
+
+<md-chip-list class="mat-chip" *ngFor="let c of listChildrenID" style="background-color: dodgerblue">
+  <md-chip style="background-color: dodgerblue; font-family: Pacifico" (dblclick)="eventDoubleClick($event)">
+    {{c}}
+  </md-chip>
+</md-chip-list>
 
 <toaster-container></toaster-container>
 <div *ngIf="!validForm">
