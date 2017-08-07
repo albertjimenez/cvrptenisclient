@@ -41,7 +41,6 @@ export class FormChildrenComponent implements OnInit {
   /**
    *
    * @param {any} value of the form representing a child
-   * @return {boolean}
    */
   // TODO make use of Window.sessionStorage for saving current childs
   onSubmit() {
@@ -68,8 +67,6 @@ export class FormChildrenComponent implements OnInit {
     const childID = event.target.lastChild.textContent;
     this.storeComponent.deleteChildrenById(childID);
     this.toasterService.pop('info', 'Niño con ID ' + childID, 'Borrado Correctamente');
-
-
   }
 
 

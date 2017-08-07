@@ -1,1 +1,90 @@
-<h1 class="animated bounceInUp">Hola</h1>
+<!--Form-->
+
+<md-card id="form_background" class="animated bounceInUp">
+  <md-card-title>Posición de tus niños</md-card-title>
+  <form novalidate [formGroup]="van" (ngSubmit)="onSubmit()">
+    <md-card-content>
+      <md-input-container>
+        <label>
+          <span>Id</span>
+          <input mdInput
+                 formControlName="id">
+        </label>
+      </md-input-container>
+    </md-card-content>
+    <md-card-content>
+      <md-input-container>
+        <label>
+          <span>Capacidad de la furgoneta</span>
+          <input mdInput
+                 type="number"
+                 min="1"
+                 formControlName="capacity">
+        </label>
+      </md-input-container>
+    </md-card-content>
+    <md-card-content>
+      <md-input-container>
+        <label>
+          <span>Coordenada X inicial</span>
+          <input mdInput
+                 type="number"
+                 formControlName="x">
+        </label>
+      </md-input-container>
+    </md-card-content>
+    <md-card-content>
+      <md-input-container>
+        <label>
+          <span>Coordenada Y</span>
+          <input mdInput
+                 type="number"
+                 formControlName="y">
+        </label>
+      </md-input-container>
+      <!--Optional EndX, EndY-->
+      <h3 class="glow">
+        Déjalo en blanco para indicar que el vehículo vuelve al mismo sitio en el que empezó.
+      </h3>
+      <md-card-content>
+        <md-input-container>
+          <label>
+            <span>Coordenada X final</span>
+            <input mdInput
+                   type="number"
+                   formControlName="endx">
+          </label>
+        </md-input-container>
+      </md-card-content>
+      <md-card-content>
+        <md-input-container>
+          <label>
+            <span>Coordenada Y</span>
+            <input mdInput
+                   type="number"
+                   formControlName="endy">
+          </label>
+        </md-input-container>
+      </md-card-content>
+      <a md-raised-button style="background-color: gold" [routerLink]="['/children']">Atrás</a>
+      <button md-raised-button color="accent" [disabled]="van.invalid">Añadir nueva furgoneta</button>
+      <a md-raised-button style="background-color: lawngreen"
+         [disabled]="van.invalid" [routerLink]="['/solution']">Finalizar</a>
+    </md-card-content>
+  </form>
+</md-card>
+
+<h1 class="my-shadow" style="font-family: Lobster;text-align: center">Vehículos añadidos</h1>
+
+<md-chip-list class="mat-chip" *ngFor="let c of listVansID" style="background-color: dodgerblue">
+
+  <!--TODO doubleClick event-->
+  <md-chip (dblclick)="eventDoubleClick($event)" style="background-color: dodgerblue; font-family: Pacifico">
+    {{c}}
+  </md-chip>
+</md-chip-list>
+
+<toaster-container></toaster-container>
+<div *ngIf="!validForm">
+
+</div>

@@ -1,0 +1,41 @@
+@import url('http://fonts.googleapis.com/css?family=Lobster');
+
+#form_background {
+  position: relative;
+  background-color: #1973e8;
+  border: 0.4rem solid #2200ff;
+  border-radius: 1rem;
+  margin: 0 auto;
+  width: 50%;
+  height: 40rem;
+  text-align: center;
+  color: #fffcf9;
+}
+
+#message {
+  height: 6rem;
+}
+
+.form_box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#background-wrap {
+  bottom: 0;
+  left: 0;
+  padding-top: 50px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.glow {
+  color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+  text-align: center;
+}
+

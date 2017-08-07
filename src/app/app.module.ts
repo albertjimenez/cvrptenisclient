@@ -22,11 +22,16 @@ import {MdFooterComponent} from './md-footer/md-footer.component';
 import {FormVanComponent} from './form-van/form-van.component';
 import {FormChildrenComponent} from './form-children/form-children.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
+import {ImageSolutionComponent} from './image-solution/image-solution.component';
+import {HttpModule} from "@angular/http";
 // Const routes to form-children and form-van
-const routes: Routes = [{
+const routes: Routes = [
+  {
   path: 'vans',
   component: FormVanComponent
+  }, {
+    path: 'solution',
+    component: ImageSolutionComponent
 },
   {
     path: 'children',
@@ -41,10 +46,12 @@ const routes: Routes = [{
     MdFooterComponent,
     FormVanComponent,
     FormChildrenComponent,
+    ImageSolutionComponent,
   ],
   imports: [
     BrowserModule, MdButtonModule, MdIconModule, MdToolbarModule, RouterModule.forRoot(routes),
-    ReactiveFormsModule, MdInputModule, BrowserAnimationsModule, MdCardModule, ToasterModule, MdListModule, MdChipsModule, MdRippleModule
+    ReactiveFormsModule, MdInputModule, BrowserAnimationsModule, MdCardModule, ToasterModule,
+    MdListModule, MdChipsModule, MdRippleModule, HttpModule
   ],
   exports: [MdButtonModule, RouterModule],
   providers: [MdIconRegistry],

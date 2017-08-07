@@ -1,5 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {StoreAndGenerateService} from '../store-and-generate.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import swal from 'sweetalert2';
+import {ToasterService} from 'angular2-toaster';
+import {Van} from '../van';
+import 'rxjs/add/operator/map';
+
+
+declare var $: any;
+
 
 @Component({
   selector: 'app-form-van',
@@ -9,12 +18,61 @@ import {StoreAndGenerateService} from '../store-and-generate.service';
 })
 export class FormVanComponent implements OnInit {
 
-  constructor(private storeAndGenerate: StoreAndGenerateService) {
+  van: FormGroup;
+
+  private toasterService: ToasterService;
+  @Input() listVansID: string[] = [];
+
+  @Input() validForm = true;
+
+  constructor(private storeComponent: StoreAndGenerateService, toasterService: ToasterService) {
+    this.toasterService = toasterService;
   }
 
   ngOnInit() {
-    console.log('Preparing...');
-    console.log(this.storeAndGenerate.size());
+    $('#button').hide();
+    this.van = new FormGroup({
+      id: new FormControl('', Validators.required),
+      capacity: new FormControl('', Validators.required),
+      x: new FormControl('', Validators.required),
+      y: new FormControl('', Validators.required),
+      endx: new FormControl(''),
+      endy: new FormControl('')
+    });
   }
 
+  onSubmit() {
+    const myVan = new Van(this.van.value.capacity, this.van.value.id, this.van.value.x, this.van.value.y,
+      this.van.value.endx, this.van.value.endy);
+
+
+    if (this.van.valid) {
+
+      if (isNaN(Number(myVan.endX)) || isNaN(Number(myVan.endY))) {
+        myVan.endX = myVan.x;
+        myVan.endY = myVan.y;
+      }
+
+      if (!this.storeComponent.storeVan(myVan)) {
+        this.validForm = false;
+        swal({
+          title: 'Error!',
+          text: 'Revisa el campo ID ya que se encuentra repetido con otro vehículo',
+          type: 'error',
+          confirmButtonText: 'Ok'
+        });
+      } else {
+        this.toasterService.pop('success', 'Vehículo con ID ' + myVan.id, 'Añadido Correctamente');
+        this.validForm = true;
+        this.listVansID.push(myVan.id);
+      }
+    }
+  }
+
+  eventDoubleClick(event) {
+    const vanID = event.target.lastChild.textContent;
+    this.storeComponent.deleteVanById(vanID);
+    this.toasterService.pop('info', 'Vehículo con ID ' + vanID, 'Borrado Correctamente');
+  }
 }
+

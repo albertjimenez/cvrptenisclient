@@ -11,7 +11,6 @@ export class MdNavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Componente creado');
 
   }
 
