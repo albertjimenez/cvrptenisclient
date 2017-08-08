@@ -2,7 +2,7 @@
 
 <md-card id="form_background" class="animated bounceInUp">
   <md-card-title>Posición de tus niños</md-card-title>
-  <div novalidate [formGroup]="van" (ngSubmit)="onSubmit()">
+  <form novalidate [formGroup]="van" (ngSubmit)="onSubmit()">
     <md-card-content>
       <md-input-container>
         <label>
@@ -67,18 +67,17 @@
         </md-input-container>
       </md-card-content>
       <a md-raised-button style="background-color: gold" [routerLink]="['/children']">Atrás</a>
-      <button md-raised-button color="accent" [disabled]="van.invalid">Añadir nueva furgoneta</button>
+      <button md-raised-button type="submit" color="accent" [disabled]="van.invalid">Añadir nueva furgoneta</button>
       <a md-raised-button style="background-color: lawngreen"
          [disabled]="van.invalid" [routerLink]="['/solution']">Finalizar</a>
     </md-card-content>
-  </div>
+  </form>
 </md-card>
 
 <h1 class="my-shadow" style="font-family: Lobster;text-align: center">Vehículos añadidos</h1>
 
 <md-chip-list class="mat-chip" *ngFor="let c of listVansID" style="background-color: dodgerblue">
 
-  <!--TODO doubleClick event-->
   <md-chip (dblclick)="eventDoubleClick($event)" style="background-color: dodgerblue; font-family: Pacifico">
     {{c}}
   </md-chip>
