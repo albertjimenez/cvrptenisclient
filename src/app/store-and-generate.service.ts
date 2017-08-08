@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 import {Query} from './query';
 
 
-const API_URL = 'http://cvrp-tenis.herokuapp.com/';
+const API_URL = 'https://cvrp-tenis.herokuapp.com/';
 
 const childrenList: Children[] = [];
 const vansList: Van[] = [];

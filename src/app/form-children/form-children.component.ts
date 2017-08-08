@@ -31,8 +31,8 @@ export class FormChildrenComponent implements OnInit {
     $('#button').hide();
 
     this.child = new FormGroup({
-      cost: new FormControl(''),
       id: new FormControl('', Validators.required),
+      cost: new FormControl(''),
       x: new FormControl('', Validators.required),
       y: new FormControl('', Validators.required)
     });
