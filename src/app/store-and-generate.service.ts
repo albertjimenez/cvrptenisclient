@@ -53,9 +53,9 @@ export class StoreAndGenerateService {
     const apiResource = 'solve';
     const query: Query = new Query(vansList, childrenList);
     const headers = new Headers({'Content-Type': 'application/json'});
-    headers.append('Access-Control-Allow-Headers', 'Content-Type');
-    headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    headers.append('Access-Control-Allow-Origin', '*');
+    // headers.append('Access-Control-Allow-Headers', 'Content-Type');
+    // headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    // headers.append('Access-Control-Allow-Origin', '*');
     const options = new RequestOptions({headers: headers});
     return this.http.post(API_URL + apiResource, JSON.stringify(query), options).map((res: Response) => res.text());
   }
