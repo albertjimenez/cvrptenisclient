@@ -52,8 +52,8 @@ export class FormVanComponent implements OnInit {
       capacity: ['', Validators.required],
       x: ['', Validators.required],
       y: ['', Validators.required],
-      endx: ['', Validators.required],
-      endy: ['', Validators.required]
+      endx: '',
+      endy: ''
     });
   }
   onSubmit() {
