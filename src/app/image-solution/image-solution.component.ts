@@ -23,8 +23,6 @@ export class ImageSolutionComponent implements OnInit {
 
   ngOnInit() {
     $('#button').hide();
-
-    this.http.get(this.storeComponent.getAPIURL()).map(res => res.text()).subscribe(data => console.log('Server OK ', data));
   }
 
   getAll() {
@@ -32,6 +30,7 @@ export class ImageSolutionComponent implements OnInit {
   }
 
   getSolution() {
+    this.http.get(this.storeComponent.getAPIURL()).map(res => res.text()).subscribe(data => console.log('Server OK ', data));
     $('#button2').hide();
     this.storeComponent.getSolution().subscribe(data => this.imageSrc = 'data:image/png;base64,' + data);
   }

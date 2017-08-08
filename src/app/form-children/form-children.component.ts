@@ -38,7 +38,7 @@ export class FormChildrenComponent implements OnInit {
     });
 
     // Query status of Heroku API:
-    this.http.get(this.storeComponent.getAPIURL()).map(res => res.text()).subscribe(data => console.log('Server OK ', data));
+
   }
 
   /**
@@ -47,6 +47,7 @@ export class FormChildrenComponent implements OnInit {
    */
   // TODO make use of Window.sessionStorage for saving current childs
   onSubmit() {
+    this.http.get(this.storeComponent.getAPIURL()).map(res => res.text()).subscribe(data => console.log('Server OK ', data));
     const myChild = new Children(this.child.value.id, this.child.value.x, this.child.value.y, this.child.value.cost);
     if (this.child.valid) {
       if (!this.storeComponent.storeChildren(myChild)) {

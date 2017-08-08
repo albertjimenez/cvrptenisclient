@@ -41,10 +41,13 @@ export class FormVanComponent implements OnInit {
       endy: new FormControl('')
     });
 
-    this.http.get(this.storeComponent.getAPIURL()).map(res => res.text()).subscribe(data => console.log('Server OK ', data));
+
   }
 
   onSubmit() {
+
+    this.http.get(this.storeComponent.getAPIURL()).map(res => res.text()).subscribe(data => console.log('Server OK ', data));
+
     const myVan = new Van(this.van.value.capacity, this.van.value.id, this.van.value.x, this.van.value.y,
       this.van.value.endx, this.van.value.endy);
 
