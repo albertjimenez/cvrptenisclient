@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StoreAndGenerateService} from '../store-and-generate.service';
 import {Children} from '../children';
 import swal from 'sweetalert2';
@@ -23,22 +23,32 @@ export class FormChildrenComponent implements OnInit {
 
   @Input() validForm = true;
 
-  constructor(private storeComponent: StoreAndGenerateService, toasterService: ToasterService, private http: Http) {
+  constructor(private storeComponent: StoreAndGenerateService, toasterService: ToasterService,
+              private http: Http, private fb: FormBuilder) {
     this.toasterService = toasterService;
+    this.buildForm();
   }
 
   ngOnInit() {
     $('#button').hide();
 
-    this.child = new FormGroup({
-      id: new FormControl('', Validators.required),
-      cost: new FormControl(''),
-      x: new FormControl('', Validators.required),
-      y: new FormControl('', Validators.required)
+    // this.child = new FormGroup({
+    //   id: new FormControl('', Validators.required),
+    //   cost: new FormControl(''),
+    //   x: new FormControl('', Validators.required),
+    //   y: new FormControl('', Validators.required)
+    // });
+
+
+  }
+
+  buildForm() {
+    this.child = this.fb.group({
+      id: ['', Validators.required],
+      cost: ['', Validators.required],
+      x: ['', Validators.required],
+      y: ['', Validators.required]
     });
-
-    // Query status of Heroku API:
-
   }
 
   /**
@@ -47,7 +57,7 @@ export class FormChildrenComponent implements OnInit {
    */
   // TODO make use of Window.sessionStorage for saving current childs
   onSubmit() {
-    this.http.get(this.storeComponent.getAPIURL()).map(res => res.text()).subscribe(data => console.log('Server OK ', data));
+
     const myChild = new Children(this.child.value.id, this.child.value.x, this.child.value.y, this.child.value.cost);
     if (this.child.valid) {
       if (!this.storeComponent.storeChildren(myChild)) {
@@ -64,6 +74,7 @@ export class FormChildrenComponent implements OnInit {
         this.listChildrenID.push(myChild.id);
       }
     }
+    this.http.get(this.storeComponent.getAPIURL()).map(res => res.text()).subscribe(data => console.log('Server OK ', data));
 
   }
 

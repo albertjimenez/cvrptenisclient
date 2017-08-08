@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {StoreAndGenerateService} from '../store-and-generate.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import swal from 'sweetalert2';
 import {ToasterService} from 'angular2-toaster';
 import {Van} from '../van';
@@ -26,24 +26,36 @@ export class FormVanComponent implements OnInit {
 
   @Input() validForm = true;
 
-  constructor(private storeComponent: StoreAndGenerateService, toasterService: ToasterService, private http: Http) {
+  constructor(private storeComponent: StoreAndGenerateService, toasterService: ToasterService,
+              private http: Http, private fb: FormBuilder) {
     this.toasterService = toasterService;
+    this.buildForm();
   }
 
   ngOnInit() {
     $('#button').hide();
-    this.van = new FormGroup({
-      id: new FormControl('', Validators.required),
-      capacity: new FormControl('', Validators.required),
-      x: new FormControl('', Validators.required),
-      y: new FormControl('', Validators.required),
-      endx: new FormControl(''),
-      endy: new FormControl('')
-    });
+    // this.van = new FormGroup({
+    //   id: new FormControl('', Validators.required),
+    //   capacity: new FormControl('', Validators.required),
+    //   x: new FormControl('', Validators.required),
+    //   y: new FormControl('', Validators.required),
+    //   endx: new FormControl(''),
+    //   endy: new FormControl('')
+    // });
 
 
   }
 
+  buildForm() {
+    this.van = this.fb.group({
+      id: ['', Validators.required],
+      capacity: ['', Validators.required],
+      x: ['', Validators.required],
+      y: ['', Validators.required],
+      endx: ['', Validators.required],
+      endy: ['', Validators.required]
+    });
+  }
   onSubmit() {
 
     this.http.get(this.storeComponent.getAPIURL()).map(res => res.text()).subscribe(data => console.log('Server OK ', data));
