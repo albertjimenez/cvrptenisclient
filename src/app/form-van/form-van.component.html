@@ -2,7 +2,7 @@
 
 <md-card id="form_background" class="animated bounceInUp">
   <md-card-title>Posición de tus niños</md-card-title>
-  <form novalidate [formGroup]="van" (ngSubmit)="onSubmit()">
+  <div novalidate [formGroup]="van" (ngSubmit)="onSubmit()">
     <md-card-content>
       <md-input-container>
         <label>
@@ -71,7 +71,7 @@
       <a md-raised-button style="background-color: lawngreen"
          [disabled]="van.invalid" [routerLink]="['/solution']">Finalizar</a>
     </md-card-content>
-  </form>
+  </div>
 </md-card>
 
 <h1 class="my-shadow" style="font-family: Lobster;text-align: center">Vehículos añadidos</h1>
