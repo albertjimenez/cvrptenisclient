@@ -4,6 +4,7 @@ import {StoreAndGenerateService} from '../store-and-generate.service';
 import {Children} from '../children';
 import swal from 'sweetalert2';
 import {ToasterService} from 'angular2-toaster';
+import {Http} from '@angular/http';
 
 
 declare var $: any;
@@ -22,7 +23,7 @@ export class FormChildrenComponent implements OnInit {
 
   @Input() validForm = true;
 
-  constructor(private storeComponent: StoreAndGenerateService, toasterService: ToasterService) {
+  constructor(private storeComponent: StoreAndGenerateService, toasterService: ToasterService, private http: Http) {
     this.toasterService = toasterService;
   }
 
@@ -36,6 +37,8 @@ export class FormChildrenComponent implements OnInit {
       y: new FormControl('', Validators.required)
     });
 
+    // Query status of Heroku API:
+    this.http.get(this.storeComponent.getAPIURL()).map(res => res.text()).subscribe(data => console.log('Server OK ', data));
   }
 
   /**

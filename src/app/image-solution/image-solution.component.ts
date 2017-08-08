@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {StoreAndGenerateService} from '../store-and-generate.service';
 import {DomSanitizer} from '@angular/platform-browser';
+import {Http} from '@angular/http';
 
 
 declare var $: any;
@@ -16,13 +17,14 @@ export class ImageSolutionComponent implements OnInit {
   @Input() imageSrc = '';
   myDomSanit: DomSanitizer;
 
-  constructor(private storeComponent: StoreAndGenerateService, domSanitizer: DomSanitizer) {
+  constructor(private storeComponent: StoreAndGenerateService, domSanitizer: DomSanitizer, private http: Http) {
     this.myDomSanit = domSanitizer;
   }
 
   ngOnInit() {
     $('#button').hide();
 
+    this.http.get(this.storeComponent.getAPIURL()).map(res => res.text()).subscribe(data => console.log('Server OK ', data));
   }
 
   getAll() {
@@ -31,6 +33,6 @@ export class ImageSolutionComponent implements OnInit {
 
   getSolution() {
     $('#button2').hide();
-    this.storeComponent.getSolution(this.imageSrc).subscribe(data => this.imageSrc = 'data:image/png;base64,' + data);
+    this.storeComponent.getSolution().subscribe(data => this.imageSrc = 'data:image/png;base64,' + data);
   }
 }

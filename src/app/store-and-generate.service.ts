@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 import {Query} from './query';
 
 
-const API_URL = 'http://localhost:8080/api/solve';
+const API_URL = 'http://cvrp-tenis.herokuapp.com/';
 
 const childrenList: Children[] = [];
 const vansList: Van[] = [];
@@ -44,17 +44,22 @@ export class StoreAndGenerateService {
   }
 
   getAll(): Observable<any> {
-    return this.http.get('http://localhost:8080/api/stub')
+    const apiResource = 'stub';
+    return this.http.get(API_URL + apiResource)
       .map((response: Response) => response.json());
   }
 
-  getSolution(imageSrc: string) {
+  getSolution() {
+    const apiResource = 'solve';
     const query: Query = new Query(vansList, childrenList);
     const headers = new Headers({'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    return this.http.post(API_URL, JSON.stringify(query), options).map((res: Response) => res.text());
+    return this.http.post(API_URL + apiResource, JSON.stringify(query), options).map((res: Response) => res.text());
   }
 
+  getAPIURL() {
+    return API_URL;
+  }
   // private extractData(res: Response) {
   //   const body = res.json();
   //   return body.data || {};

@@ -5,6 +5,7 @@ import swal from 'sweetalert2';
 import {ToasterService} from 'angular2-toaster';
 import {Van} from '../van';
 import 'rxjs/add/operator/map';
+import {Http} from '@angular/http';
 
 
 declare var $: any;
@@ -25,7 +26,7 @@ export class FormVanComponent implements OnInit {
 
   @Input() validForm = true;
 
-  constructor(private storeComponent: StoreAndGenerateService, toasterService: ToasterService) {
+  constructor(private storeComponent: StoreAndGenerateService, toasterService: ToasterService, private http: Http) {
     this.toasterService = toasterService;
   }
 
@@ -39,6 +40,8 @@ export class FormVanComponent implements OnInit {
       endx: new FormControl(''),
       endy: new FormControl('')
     });
+
+    this.http.get(this.storeComponent.getAPIURL()).map(res => res.text()).subscribe(data => console.log('Server OK ', data));
   }
 
   onSubmit() {
