@@ -67,7 +67,8 @@
         </md-input-container>
       </md-card-content>
       <a md-raised-button style="background-color: gold" [routerLink]="['/children']">Atrás</a>
-      <button md-raised-button type="submit" color="accent" [disabled]="van.invalid">Añadir nueva furgoneta</button>
+      <button md-raised-button (click)="onSubmit()" color="accent" [disabled]="van.invalid">Añadir nueva furgoneta
+      </button>
       <a md-raised-button style="background-color: lawngreen"
          [disabled]="van.invalid" [routerLink]="['/solution']">Finalizar</a>
     </md-card-content>

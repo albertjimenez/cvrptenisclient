@@ -42,8 +42,8 @@
         </label>
       </md-input-container>
     </md-card-content>
-    <button md-raised-button type="submit" color="accent" [disabled]="child.invalid">Añadir nuevo niño</button>
-    <a md-raised-button style="background-color: lawngreen" [routerLink]="['/vans']">Siguiente</a>
+    <button md-raised-button color="accent" [disabled]="child.invalid">Añadir nuevo niño</button>
+    <a md-raised-button style="background-color: lawngreen" [routerLink]="['/vans']" (click)="onSubmit()">Siguiente</a>
   </form>
 </md-card>
 
