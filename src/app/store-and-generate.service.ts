@@ -44,13 +44,13 @@ export class StoreAndGenerateService {
   }
 
   getAll(): Observable<any> {
-    const apiResource = 'stub';
+    const apiResource = 'api/stub';
     return this.http.get(API_URL + apiResource)
       .map((response: Response) => response.json());
   }
 
   getSolution() {
-    const apiResource = 'solve';
+    const apiResource = 'api/solve';
     const query: Query = new Query(vansList, childrenList);
     const headers = new Headers({'Content-Type': 'application/json'});
     // headers.append('Access-Control-Allow-Headers', 'Content-Type');
