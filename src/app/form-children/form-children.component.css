@@ -1,4 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Lobster');
+
+/*Angular Maps*/
+agm-map {
+  height: 200px;
+  width: 150px;
+}
+
+
 #form_background {
   position: relative;
   background-color: #1973e8;

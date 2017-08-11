@@ -21,6 +21,9 @@ export class FormChildrenComponent implements OnInit {
   private toasterService: ToasterService;
   @Input() listChildrenID: string[] = [];
 
+  lat = 40.4440016;
+  lng = 0.3862489;
+
   @Input() validForm = true;
 
   constructor(private storeComponent: StoreAndGenerateService, toasterService: ToasterService,
@@ -31,15 +34,15 @@ export class FormChildrenComponent implements OnInit {
 
   ngOnInit() {
     $('#button').hide();
+  }
 
-    // this.child = new FormGroup({
-    //   id: new FormControl('', Validators.required),
-    //   cost: new FormControl(''),
-    //   x: new FormControl('', Validators.required),
-    //   y: new FormControl('', Validators.required)
-    // });
-
-
+  placeMarker($event) {
+    console.log($event.coords.lat);
+    console.log($event.coords.lng);
+    this.child.patchValue({
+      x: $event.coords.lat,
+      y: $event.coords.lng,
+    });
   }
 
   buildForm() {
@@ -48,6 +51,10 @@ export class FormChildrenComponent implements OnInit {
       cost: ['', Validators.required],
       x: ['', Validators.required],
       y: ['', Validators.required]
+    });
+
+    this.child.patchValue({
+      cost: 1
     });
   }
 
@@ -59,6 +66,7 @@ export class FormChildrenComponent implements OnInit {
   onSubmit() {
 
     const myChild = new Children(this.child.value.id, this.child.value.x, this.child.value.y, this.child.value.cost);
+    myChild.cost <= 0 ? myChild.cost = 1 : myChild.cost = this.child.value.cost;
     if (this.child.valid) {
       if (!this.storeComponent.storeChildren(myChild)) {
         this.validForm = false;
