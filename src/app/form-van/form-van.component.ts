@@ -6,6 +6,7 @@ import {ToasterService} from 'angular2-toaster';
 import {Van} from '../van';
 import 'rxjs/add/operator/map';
 import {Http} from '@angular/http';
+import {MyMarker} from '../form-children/form-children.component'
 
 
 declare var $: any;
@@ -26,6 +27,22 @@ export class FormVanComponent implements OnInit {
 
   @Input() validForm = true;
 
+  lat = 40.4440016;
+
+  lng = 0.3862489;
+  marker: MyMarker = {
+    lat: this.lat,
+    lng: this.lng,
+    label: 'Inicio',
+    draggable: true
+  };
+  endMarker: MyMarker = {
+    lat: this.lat,
+    lng: this.lng,
+    label: 'Fin',
+    draggable: true
+  };
+
   constructor(private storeComponent: StoreAndGenerateService, toasterService: ToasterService,
               private http: Http, private fb: FormBuilder) {
     this.toasterService = toasterService;
@@ -34,15 +51,7 @@ export class FormVanComponent implements OnInit {
 
   ngOnInit() {
     $('#button').hide();
-    // this.van = new FormGroup({
-    //   id: new FormControl('', Validators.required),
-    //   capacity: new FormControl('', Validators.required),
-    //   x: new FormControl('', Validators.required),
-    //   y: new FormControl('', Validators.required),
-    //   endx: new FormControl(''),
-    //   endy: new FormControl('')
-    // });
-
+    this.storeComponent.getAllVans().forEach(van => this.listVansID.push(van.id))
 
   }
 
@@ -56,6 +65,7 @@ export class FormVanComponent implements OnInit {
       endy: ''
     });
   }
+
   onSubmit() {
 
     this.http.get(this.storeComponent.getAPIURL()).map(res => res.text()).subscribe(data => console.log('Server OK ', data));
@@ -91,6 +101,44 @@ export class FormVanComponent implements OnInit {
     const vanID = event.target.lastChild.textContent;
     this.storeComponent.deleteVanById(vanID);
     this.toasterService.pop('info', 'Vehículo con ID ' + vanID, 'Borrado Correctamente');
+  }
+
+  mapClicked($event) {
+    this.marker.lat = $event.coords.lat;
+    this.marker.lng = $event.coords.lng;
+    this.van.patchValue({
+      x: this.marker.lat,
+      y: this.marker.lng,
+    });
+  }
+
+  mapDblClicked($event) {
+    this.endMarker = {
+      lat: $event.coords.lat,
+      lng: $event.coords.lng,
+      draggable: true,
+      label: 'Fin'
+    };
+    this.van.patchValue({
+      endx: this.endMarker.lat,
+      endy: this.endMarker.lng,
+    });
+  }
+
+  deleteEndMarker() {
+    this.endMarker = null;
+    this.van.patchValue({
+      endx: '',
+      endy: '',
+    });
+  }
+
+  dragMarker($event, isInitial = true) {
+    if (isInitial) {
+      this.mapClicked($event);
+    } else {
+      this.mapDblClicked($event);
+    }
   }
 }
 

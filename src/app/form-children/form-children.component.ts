@@ -21,8 +21,16 @@ export class FormChildrenComponent implements OnInit {
   private toasterService: ToasterService;
   @Input() listChildrenID: string[] = [];
 
+  // Tenis club coords
   lat = 40.4440016;
+
   lng = 0.3862489;
+  marker: MyMarker = {
+    lat: this.lat,
+    lng: this.lng,
+    label: 'Inicio',
+    draggable: true
+  };
 
   @Input() validForm = true;
 
@@ -34,14 +42,16 @@ export class FormChildrenComponent implements OnInit {
 
   ngOnInit() {
     $('#button').hide();
+    this.storeComponent.getAllChildren().forEach(c => this.listChildrenID.push(c.id));
   }
 
-  placeMarker($event) {
-    console.log($event.coords.lat);
-    console.log($event.coords.lng);
+
+  clickMarker($event) {
+    this.marker.lat = $event.coords.lat;
+    this.marker.lng = $event.coords.lng;
     this.child.patchValue({
-      x: $event.coords.lat,
-      y: $event.coords.lng,
+      x: this.marker.lat,
+      y: this.marker.lng,
     });
   }
 
@@ -93,4 +103,11 @@ export class FormChildrenComponent implements OnInit {
   }
 
 
+}
+
+export interface MyMarker {
+  lat: number;
+  lng: number;
+  label?: string,
+  draggable: boolean;
 }

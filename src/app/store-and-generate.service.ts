@@ -25,6 +25,13 @@ export class StoreAndGenerateService {
     return false;
   }
 
+  getAllVans(): Van[] {
+    return vansList;
+  }
+
+  getAllChildren(): Children[] {
+    return childrenList;
+  }
   storeVan(van: Van): boolean {
     if (vansList.filter(v => v.id === van.id).length === 0) {
       vansList.push(van);

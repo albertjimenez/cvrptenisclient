@@ -75,6 +75,25 @@
   </form>
 </md-card>
 
+<agm-map [fullscreenControl]="true" [streetViewControl]="false" [disableDoubleClickZoom]="true"
+         (mapClick)="mapClicked($event)" (mapDblClick)="mapDblClicked($event)"
+         [latitude]="lat" [longitude]="lng">
+  <!--Start marker-->
+  <agm-marker [latitude]="marker.lat" [longitude]="marker.lng" (dragEnd)="dragMarker($event)"
+              [iconUrl]="'assets/vehicle_marker.png'"
+              [markerDraggable]="marker.draggable">
+    <agm-info-window>{{marker.label}}</agm-info-window>
+  </agm-marker>
+  <!--End Marker Optional-->
+  <div *ngIf="endMarker">
+    <agm-marker [latitude]="endMarker.lat" [longitude]="endMarker.lng" (markerClick)="deleteEndMarker()"
+                [iconUrl]="'assets/vehicle_marker_end.png'" (dragEnd)="dragMarker($event,false)"
+                [markerDraggable]="endMarker.draggable">
+      <agm-info-window>{{endMarker.label}}</agm-info-window>
+    </agm-marker>
+  </div>
+</agm-map>
+
 <h1 class="my-shadow" style="font-family: Lobster;text-align: center">Vehículos añadidos</h1>
 
 <md-chip-list class="mat-chip" *ngFor="let c of listVansID" style="background-color: dodgerblue">
