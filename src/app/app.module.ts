@@ -9,6 +9,7 @@ import {
   MdButtonModule,
   MdCardModule,
   MdChipsModule,
+  MdDialogModule,
   MdIconModule,
   MdIconRegistry,
   MdInputModule,
@@ -25,6 +26,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ImageSolutionComponent} from './image-solution/image-solution.component';
 import {HttpModule} from '@angular/http';
 import {AgmCoreModule} from '@agm/core';
+import {DialogComponent} from "./dialog/dialog.component";
 // Const routes to form-children and form-van
 const routes: Routes = [
   {
@@ -48,18 +50,20 @@ const routes: Routes = [
     FormVanComponent,
     FormChildrenComponent,
     ImageSolutionComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule, MdButtonModule, MdIconModule, MdToolbarModule, RouterModule.forRoot(routes),
     ReactiveFormsModule, MdInputModule, BrowserAnimationsModule, MdCardModule, ToasterModule,
-    MdListModule, MdChipsModule, MdRippleModule, HttpModule,
+    MdListModule, MdChipsModule, MdRippleModule, HttpModule, MdDialogModule, MdListModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDfCdvJjWeFnxPCJWWHTpYYy7qw-Uu14-4'
     })
   ],
   exports: [MdButtonModule, RouterModule],
   providers: [MdIconRegistry],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogComponent]
 })
 export class AppModule {
 }
