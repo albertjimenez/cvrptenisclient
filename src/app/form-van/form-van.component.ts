@@ -43,7 +43,7 @@ export class FormVanComponent implements OnInit {
     draggable: true
   };
 
-  constructor(private storeComponent: StoreAndGenerateService, toasterService: ToasterService,
+  constructor(public storeComponent: StoreAndGenerateService, toasterService: ToasterService,
               private http: Http, private fb: FormBuilder) {
     this.toasterService = toasterService;
     this.buildForm();

@@ -69,8 +69,11 @@
       <a md-raised-button style="background-color: gold" [routerLink]="['/children']">Atrás</a>
       <button md-raised-button color="accent" [disabled]="van.invalid">Añadir nueva furgoneta
       </button>
-      <a md-raised-button style="background-color: lawngreen"
-         [disabled]="van.invalid" [routerLink]="['/solution']">Finalizar</a>
+      <a md-raised-button style="background-color: lawngreen">
+        <div *ngIf="storeComponent.getAllVans().length > 0">
+          <a [routerLink]="['/solution']">Siguiente</a>
+        </div>
+      </a>
     </md-card-content>
   </form>
 </md-card>

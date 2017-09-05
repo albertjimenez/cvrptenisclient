@@ -42,7 +42,11 @@
       </md-input-container>
     </md-card-content>
     <button md-raised-button color="accent" [disabled]="child.invalid">Añadir nuevo niño</button>
-    <a md-raised-button style="background-color: lawngreen" [routerLink]="['/vans']">Siguiente</a>
+    <a md-raised-button style="background-color: lawngreen">
+      <div *ngIf="storeComponent.getAllChildren().length > 0">
+        <a [routerLink]="['/vans']">Siguiente</a>
+      </div>
+    </a>
   </form>
 </md-card>
 <agm-map [fullscreenControl]="true" [streetViewControl]="false" [disableDoubleClickZoom]="true"

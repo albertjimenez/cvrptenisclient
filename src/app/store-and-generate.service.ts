@@ -60,9 +60,6 @@ export class StoreAndGenerateService {
     const apiResource = 'https://cvrp-tenis.herokuapp.com/api/solve';
     const query: Query = new Query(vansList, childrenList);
     const headers = new Headers({'Content-Type': 'application/json'});
-    // headers.append('Access-Control-Allow-Headers', 'Content-Type');
-    // headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    // headers.append('Access-Control-Allow-Origin', '*');
     const options = new RequestOptions({headers: headers});
     return this.http.post(apiResource, JSON.stringify(query), options).map((res: Response) => res.text());
   }
@@ -70,18 +67,5 @@ export class StoreAndGenerateService {
   getAPIURL() {
     return API_URL;
   }
-  // private extractData(res: Response) {
-  //   const body = res.json();
-  //   return body.data || {};
-  // }
-  // private handleErrorObservable (error: Response | any) {
-  //   console.error(error.message || error);
-  //   return Observable.throw(error.message || error);
-  // }
-  // private handleErrorPromise (error: Response | any) {
-  //   console.error(error.message || error);
-  //   return Promise.reject(error.message || error);
-  // }
-
 
 }

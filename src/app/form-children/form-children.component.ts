@@ -34,7 +34,7 @@ export class FormChildrenComponent implements OnInit {
 
   @Input() validForm = true;
 
-  constructor(private storeComponent: StoreAndGenerateService, toasterService: ToasterService,
+  constructor(public storeComponent: StoreAndGenerateService, toasterService: ToasterService,
               private http: Http, private fb: FormBuilder) {
     this.toasterService = toasterService;
     this.buildForm();
